@@ -3,11 +3,21 @@
 # Introduction {#javascript}
 \sectionmark{Introduction}
 
-The same plotly.js events that we leveraged in **shiny** through `event_data()` in Section \@ref(shiny-plotly-inputs) can also be handled using JavaScript (JS) instead of R, which offers numerous advantages:
+\original{
+The same plotly.js events that we leveraged in **shiny** through `event_data()` in Section \@ref(shiny-plotly-inputs) can also be handled using JavaScript (JS) instead of R, which offers numerous advantages:}
 
-1. Your web browser natively understands JS, so writing event handlers in JS instead of R offers the potential of having a purely client-side webpage instead of client-server app, making the end result easier to share, host, and maintain.^[Comparatively speaking, client-server apps require way more runtime software dependencies. In the case of **shiny** apps, RStudio provides accessible resources for hosting shiny apps https://shiny.rstudio.com/articles/#deployment, but using these services to host apps that encounter lots of traffic will either cost money and/or time for setting up the proper computational infrastructure.] That being said, the effort required to rewrite a 'heavy-duty' client-server app as a 'light-weight' client-side webpage isn't always worth the investment; so before doing so, you should have a clear vision for the interactivity you desire, be fairly confident that vision won't change in the future, and have a use-case that doesn't require sophisticated statistical computations to be run dynamically in response to user events (i.e., it's not practical or feasible to pre-compute).^[Compared to JS, R has way more facilities for statistical computing.]
-2. There are certain things you can do in JS that you can't necessarily do in R, such as accessing the web browser's `window` API to open hyperlinks in response to plotly.js click events (e.g., Figure \@ref(fig:click-open)).
-3. JS event handlers can be noticeably faster than running comparable code on an external R process, especially with a slow internet connection.
+セクション \@ref(shiny-plotly-inputs) において**shiny**の`event_data()`を使って利用したplotly.jsのイベントは，
+Rの代わりにJavaScript(JS)を用いても扱うことができ，JSを用いるメリットは大きい。
+
+\original{
+1. Your web browser natively understands JS, so writing event handlers in JS instead of R offers the potential of having a purely client-side webpage instead of client-server app, making the end result easier to share, host, and maintain.^[Comparatively speaking, client-server apps require way more runtime software dependencies. In the case of **shiny** apps, RStudio provides accessible resources for hosting shiny apps https://shiny.rstudio.com/articles/#deployment, but using these services to host apps that encounter lots of traffic will either cost money and/or time for setting up the proper computational infrastructure.] That being said, the effort required to rewrite a 'heavy-duty' client-server app as a 'light-weight' client-side webpage isn't always worth the investment; so before doing so, you should have a clear vision for the interactivity you desire, be fairly confident that vision won't change in the future, and have a use-case that doesn't require sophisticated statistical computations to be run dynamically in response to user events (i.e., it's not practical or feasible to pre-compute).^[Compared to JS, R has way more facilities for statistical computing.]}
+
+1. ブラウザはJSで動いているため，イベントをJSで扱うことができれば完全にクライアントサイドで動くウェブページを作る事ができる。
+　　結果として，シェアやホスト，メンテナンスがしやすいウェブアプリとなる。^[クライアント・サーバーアプリとなるとランタイムソフトウェアの依存が多くなる。]
+
+
+3. There are certain things you can do in JS that you can't necessarily do in R, such as accessing the web browser's `window` API to open hyperlinks in response to plotly.js click events (e.g., Figure \@ref(fig:click-open)).
+4. JS event handlers can be noticeably faster than running comparable code on an external R process, especially with a slow internet connection.
 
 For those new to JS, you may find it helpful to compare code examples from this part of the book to code examples from Section \@ref(proxies).^[In fact, converting some examples from that section from **shiny** to JavaScript/HTML would be a good exercise!] That's because, the `plotlyProxy()` interface which powers that section is just an R interface to [plotly.js's JavaScript functions](https://plot.ly/javascript/plotlyjs-function-reference), and is primarily for updating graphs within an event handler. Therefore, if you understand how the examples in that section work, you can translate a good amount of that knowledge to a JS context as well.
 However, when handling these events in JS instead of R, you'll want to be familiar with JavaScript Object Notation (JSON), which is introduced in Chapter \@ref(json). That chapter also offers a minimal JS programming foundation for manipulating JSON, then Chapter \@ref(js-event-handlers) quickly covers how to attach JS event handlers to various plotly.js events, which is really all that's required to loosely understand the bulk of the examples in Chapters \@ref(supplying-custom-data) and \@ref(client-side).
